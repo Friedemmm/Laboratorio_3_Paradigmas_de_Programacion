@@ -1,0 +1,81 @@
+package org.proyecto.Class;
+
+public class Player {
+    // Atributos
+    private int id;
+    private String name;
+    private String color;
+    private int wins;
+    private int losses;
+    private int draws;
+    private int remainingPieces;
+
+    // Constructor
+    public Player(int id, String name, String color, int wins, int losses, int draws, int remainingPieces) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+        this.wins = wins;
+        this.losses = losses;
+        this.draws = draws;
+        this.remainingPieces = remainingPieces;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public int getDraws() {
+        return draws;
+    }
+
+    public int getRemainingPieces() {
+        return remainingPieces;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+
+    public void setDraws(int draws) {
+        this.draws = draws;
+    }
+
+    public void setRemainingPieces(int remainingPieces) {
+        this.remainingPieces = remainingPieces;
+    }
+}
