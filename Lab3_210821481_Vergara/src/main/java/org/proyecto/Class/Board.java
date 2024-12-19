@@ -83,5 +83,48 @@ public class Board {
         }
     }
 
+    /**
+     * RF08.
+     * Verifica si hay una victoria vertical (4 fichas en columna).
+     * @return El número del jugador ganador (1 o 2), o 0 si no hay ganador.
+     */
+    public int verificarVictoriaVertical() {
+        // Recorrer cada columna.
+        for (int j = 0; j < 7; j++) {
+            // Recorrer cada fila.
+            for (int i = 0; i <= 5; i++) {
+                // Si encontramos una ficha.
+                if (board[i][j] != 0) {
+                    // Verificar si hay 4 consecutivas.
+                    if (board[i][j] == board[i + 1][j] && board[i][j] == board[i + 2][j] && board[i][j] == board[i + 3][j]) {
+                        return board[i][j]; // Retorna el jugador.
+                    }
+                }
+            }
+        }
+        return 0; // No hay ganador vertical.
+    }
+
+    /**
+     * RF09.
+     * Verifica si hay una victoria horizontal (4 fichas en fila).
+     * @return el número del jugador ganador (1 o 2), o 0 si no hay ganador.
+     */
+    public int verificarVictoriaHorizontal() {
+        // Recorrer cada fila.
+        for (int i = 0; i < 6; i++) {
+            // Recorrer cada columna.
+            for (int j = 0; j <= 3; j++) {
+                // Si encontramos una ficha.
+                if (board[i][j] != 0) {
+                    // Verificar si hay 4 consecutivas.
+                    if (board[i][j] == board[i][j + 1] && board[i][j] == board[i][j + 2] && board[i][j] == board[i][j + 3]) {
+                        return board[i][j]; // Retorna el jugador.
+                    }
+                }
+            }
+        }
+        return 0; // No hay ganador horizontal.
+    }
 
 }
