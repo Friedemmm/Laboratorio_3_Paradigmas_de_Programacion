@@ -107,10 +107,10 @@ public class Board {
         for (int j = 0; j < 7; j++) {
             // Recorrer cada fila, pero solo hasta donde podamos tener 4 en línea.
             for (int i = 0; i <= 2; i++) {
-                // Si encontramos una ficha.
+                // Sí encontramos una ficha.
                 if (board[i][j] != 0) {
                     // Verificar si hay 4 consecutivas.
-                    if (i + 3 < 6 && board[i][j] == board[i + 1][j] && board[i][j] == board[i + 2][j] && board[i][j] == board[i + 3][j]) {
+                    if (board[i][j] == board[i + 1][j] && board[i][j] == board[i + 2][j] && board[i][j] == board[i + 3][j]) {
                         return board[i][j]; // Retorna el jugador.
                     }
                 }
