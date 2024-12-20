@@ -28,7 +28,7 @@ public class Player {
      * Obtiene el identificador del jugador.
      * @return El ID del jugador.
      */
-    public int getId() {
+    public int getID() {
         return id;
     }
 
