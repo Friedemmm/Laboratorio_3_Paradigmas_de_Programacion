@@ -1,28 +1,35 @@
 package org.proyecto.Class;
+import org.proyecto.Interface.TDApiece;
 
 /**
  * Representa una pieza de color en el juego.
  */
-public class Piece {
-    // Atributo.
+public class Piece implements TDApiece {
+    /// Atributos.
     private String color;
 
     //---------------------------------------------------------//
 
-    // Getter.
+    /// Getters.
+
     /**
      * Obtiene el color de la pieza.
      * @return El color de la pieza.
      */
+    @Override
     public String getColor() {
         return color;
     }
 
-    // Setter.
+    //---------------------------------------------------------//
+
+    /// Setters.
+
     /**
      * Establece el color de la pieza.
      * @param color El nuevo color que se asignará a la pieza.
      */
+    @Override
     public void setColor(String color) {
         this.color = color;
     }

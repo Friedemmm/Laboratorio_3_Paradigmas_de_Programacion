@@ -1,6 +1,4 @@
 package org.proyecto.Class;
-import org.proyecto.Class.Board;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,7 @@ public class Game {
     private Player player2;
     private Board board;
     private int currentTurn;
-    private List<String> moveHistory;
+    private List<String> historial;
 
     //---------------------------------------------------------//
 
@@ -51,8 +49,8 @@ public class Game {
      * Obtiene el historial de movimientos del juego.
      * @return La lista de movimientos realizada en el juego.
      */
-    public List<String> getMoveHistory() {
-        return moveHistory;
+    public List<String> getHistorial() {
+        return historial;
     }
 
     // Setter.
@@ -95,10 +93,10 @@ public class Game {
     /**
      * Establece el historial de movimientos del juego.
      *
-     * @param moveHistory La lista de movimientos realizada en el juego.
+     * @param historial La lista de movimientos realizada en el juego.
      */
-    public void setMoveHistory(List<String> moveHistory) {
-        this.moveHistory = moveHistory;
+    public void setHistorial(List<String> historial) {
+        this.historial = historial;
     }
 
     //---------------------------------------------------------//
@@ -116,7 +114,7 @@ public class Game {
         this.player2 = player2;
         this.board = board;
         this.currentTurn = currentTurn;
-        this.moveHistory = new ArrayList<>();
+        this.historial = new ArrayList<>();
     }
 
     /**
@@ -127,8 +125,43 @@ public class Game {
      */
     public void history(int columna, String color) {
         String movimiento = "(" + color + ", " + columna + ")/n";
-        moveHistory.add(movimiento);
+        historial.add(movimiento);
     }
-    
+
+    /**
+     * RF14.
+     * Verifica si el juego está en estado de empate
+     * @return true si hay empate, false en caso contrario
+     */
+    public boolean esEmpate() {
+        boolean noFichas = false;
+        if (player1.getRemainingPieces() == 0 || player2.getRemainingPieces() == 0) {
+            noFichas = true;
+        }
+        //
+        if (noFichas && board.entregarGanador() == 0|| board.sePuedeJugar() && board.entregarGanador() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * RF15.
+     * Actualiza las estadisticas de los jugadores; win, loss o draw.
+     */
+    public void actualizarEstadisticas() {
+        if (board.entregarGanador() == 1) {
+            player1.setWins(player1.getWins() + 1);
+            player2.setLosses(player2.getLosses() + 1);
+        }
+        if (board.entregarGanador() == 2) {
+            player2.setWins(player2.getWins() + 1);
+            player1.setLosses(player1.getLosses() + 1);
+        }
+        if (esEmpate()) {
+            player1.setDraws(player1.getDraws() + 1);
+            player2.setDraws(player2.getDraws() + 1);
+        }
+    }
 
 }

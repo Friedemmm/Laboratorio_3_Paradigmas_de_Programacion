@@ -1,30 +1,37 @@
 package org.proyecto.Class;
+import org.proyecto.Interface.TDAboard;
 
 /**
  * Representa el tablero de 6 filas y 7 columnas.
  */
-public class Board {
-    // Atributo.
+public class Board implements TDAboard {
+    /// Atributos.
     private int[][] board;
     private Player player1;
     private Player player2;
 
     //---------------------------------------------------------//
 
-    // Getter.
+    /// Getters.
+
     /**
      * Obtiene el tablero actual.
      * @return La matriz que representa el tablero.
      */
+    @Override
     public int[][] getBoard() {
         return board;
     }
 
-    // Setter.
+    //---------------------------------------------------------//
+
+    /// Setters.
+
     /**
      * Establece un nuevo tablero.
      * @param board Una matriz de enteros que reemplazará el tablero actual.
      */
+    @Override
     public void setBoard(int[][] board) {
         this.board = board;
     }
@@ -34,6 +41,7 @@ public class Board {
      * @param player1 El primer jugador.
      * @param player2 El segundo jugador.
      */
+    @Override
     public void setPlayers(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
@@ -60,13 +68,14 @@ public class Board {
      * @return {@code true} si hay al menos una columna con espacio disponible sino {@code false}.
      * Revisa la primera fila (arriba hacia abajo).
      */
+    @Override
     public boolean sePuedeJugar() {
         for (int j = 0; j < 7; j++) {
             if (board[0][j] == 0) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
@@ -75,6 +84,7 @@ public class Board {
      * @param columna La columna seleccionada para jugar.
      * @param pieza El número del jugador que va a jugar.
      */
+    @Override
     public void jugarFicha(int columna, Piece pieza) {
         int jugadorFichaID;
         String colorPieza = pieza.getColor();
@@ -102,6 +112,7 @@ public class Board {
      * Verifica si hay una victoria vertical (4 fichas en columna).
      * @return El número del jugador ganador (1 o 2), o 0 si no hay ganador.
      */
+    @Override
     public int verificarVictoriaVertical() {
         // Recorrer cada columna.
         for (int j = 0; j < 7; j++) {
@@ -124,6 +135,7 @@ public class Board {
      * Verifica si hay una victoria horizontal (4 fichas en fila).
      * @return el número del jugador ganador (1 o 2), o 0 si no hay ganador.
      */
+    @Override
     public int verificarVictoriaHorizontal() {
         // Recorrer cada fila.
         for (int i = 0; i < 6; i++) {
@@ -146,6 +158,7 @@ public class Board {
      * Verifica si hay una victoria diagonal (4 fichas en diagonal).
      * @return el número del jugador ganador (1 o 2), o 0 si no hay ganador.
      */
+    @Override
     public int verificarVictoriaDiagonal() {
         // Verificar diagonales descendentes.
         for (int i = 0; i <= 2; i++) {
@@ -177,6 +190,7 @@ public class Board {
      * Verifica todas las formas de ganar.
      * @return el número del jugador ganador (1 o 2), o 0 si no hay ganador.
      */
+    @Override
     public int entregarGanador() {
         // Verificar victoria vertical.
         int ganadorVertical = verificarVictoriaVertical();

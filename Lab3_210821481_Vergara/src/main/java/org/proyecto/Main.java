@@ -1,7 +1,9 @@
 package org.proyecto;
+import org.proyecto.Class.Game;
 import org.proyecto.Class.Player;
 import org.proyecto.Class.Piece;
 import org.proyecto.Class.Board;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,6 +15,8 @@ public class Main {
         Piece piezaAmarilla = new Piece("amarillo");
         Piece piezaRoja = new Piece("rojo");
 
+        Game game = new Game(player1, player2, board, 0);
+
         board.setPlayers(player1, player2);
 
         board.jugarFicha(3, piezaAmarilla);
@@ -23,5 +27,9 @@ public class Main {
         int ganador = board.entregarGanador();
 
         System.out.println(ganador);
+
+        game.actualizarEstadisticas();
+
+        System.out.println(player2.getWins());
     }
 }
