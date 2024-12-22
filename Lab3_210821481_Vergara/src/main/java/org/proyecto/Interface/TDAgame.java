@@ -9,19 +9,21 @@ public interface TDAgame {
     Player getPlayer2();
     Board getBoard();
     int getCurrentTurn();
-    List<String> getMoveHistory();
+    List<String> getHistorial();
 
     /// Setters.
     void setPlayer1(Player player1);
     void setPlayer2(Player player2);
     void setBoard(Board board);
     void setCurrentTurn(int currentTurn);
-    void setMoveHistory(List<String> moveHistory);
+    void setHistorial(List<String> historial);
 
     /// Métodos.
     void history(int columna, String color);
     boolean esEmpate();
     void actualizarEstadisticas();
+    int getCurrentPlayer();
+    void boardGetState();
 
 }
 

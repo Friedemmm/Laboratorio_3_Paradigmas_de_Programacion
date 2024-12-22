@@ -1,8 +1,10 @@
 package org.proyecto.Class;
+import org.proyecto.Interface.TDAgame;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Game {
+public class Game implements TDAgame {
     // Atributos.
     private Player player1;
     private Player player2;
@@ -17,6 +19,7 @@ public class Game {
      * Obtiene el jugador 1.
      * @return El jugador 1.
      */
+    @Override
     public Player getPlayer1() {
         return player1;
     }
@@ -25,6 +28,7 @@ public class Game {
      * Obtiene el jugador 2.
      * @return El jugador 2.
      */
+    @Override
     public Player getPlayer2() {
         return player2;
     }
@@ -33,6 +37,7 @@ public class Game {
      * Obtiene el board del juego.
      * @return El board del juego.
      */
+    @Override
     public Board getBoard() {
         return board;
     }
@@ -41,6 +46,7 @@ public class Game {
      * Obtiene la cantidad de turnos que llevan.
      * @return La cantidad de turnos que llevan.
      */
+    @Override
     public int getCurrentTurn() {
         return currentTurn;
     }
@@ -49,6 +55,7 @@ public class Game {
      * Obtiene el historial de movimientos del juego.
      * @return La lista de movimientos realizada en el juego.
      */
+    @Override
     public List<String> getHistorial() {
         return historial;
     }
@@ -56,45 +63,45 @@ public class Game {
     // Setter.
     /**
      * Establece el jugador 1.
-     *
      * @param player1 El jugador 1.
      */
+    @Override
     public void setPlayer1(Player player1) {
         this.player1 = player1;
     }
 
     /**
      * Establece el jugador 2.
-     *
      * @param player2 El jugador 2.
      */
+    @Override
     public void setPlayer2(Player player2) {
         this.player2 = player2;
     }
 
     /**
      * Establece el board del juego.
-     *
      * @param board El board del juego.
      */
+    @Override
     public void setBoard(Board board) {
         this.board = board;
     }
 
     /**
      * Establece la cantidad de turnos que llevan.
-     *
      * @param currentTurn La cantidad de turnos que llevan.
      */
+    @Override
     public void setCurrentTurn(int currentTurn) {
         this.currentTurn = currentTurn;
     }
 
     /**
      * Establece el historial de movimientos del juego.
-     *
      * @param historial La lista de movimientos realizada en el juego.
      */
+    @Override
     public void setHistorial(List<String> historial) {
         this.historial = historial;
     }
@@ -123,6 +130,7 @@ public class Game {
      * @param columna La columna donde se colocó la ficha.
      * @param color El color de la ficha jugada.
      */
+    @Override
     public void history(int columna, String color) {
         String movimiento = "(" + color + ", " + columna + ")/n";
         historial.add(movimiento);
@@ -133,6 +141,7 @@ public class Game {
      * Verifica si el juego está en estado de empate
      * @return true si hay empate, false en caso contrario
      */
+    @Override
     public boolean esEmpate() {
         boolean noFichas = false;
         if (player1.getRemainingPieces() == 0 || player2.getRemainingPieces() == 0) {
@@ -149,6 +158,7 @@ public class Game {
      * RF15.
      * Actualiza las estadisticas de los jugadores; win, loss o draw.
      */
+    @Override
     public void actualizarEstadisticas() {
         if (board.entregarGanador() == 1) {
             player1.setWins(player1.getWins() + 1);
@@ -161,6 +171,37 @@ public class Game {
         if (esEmpate()) {
             player1.setDraws(player1.getDraws() + 1);
             player2.setDraws(player2.getDraws() + 1);
+        }
+    }
+
+    /**
+     * RF16.
+     * Verifica a qué jugador le toca jugar.
+     */
+    @Override
+    public int getCurrentPlayer() {
+        if (currentTurn % 2 == 0) {  // Turno par.
+            return 1;
+        }
+        else { // Turno impar.
+            return 2;
+        }
+    }
+
+    /**
+     * RF17.
+     * Entrega el estado actual del tablero en juego.
+     */
+    @Override
+    public void boardGetState() {
+        int[][] tablero = board.getBoard();
+        System.out.print("Tablero actual:");
+        System.out.println();
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                System.out.print(tablero[i][j] + " ");
+            }
+            System.out.println();
         }
     }
 
