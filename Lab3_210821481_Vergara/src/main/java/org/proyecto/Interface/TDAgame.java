@@ -24,6 +24,8 @@ public interface TDAgame {
     void actualizarEstadisticas();
     int getCurrentPlayer();
     void boardGetState();
+    boolean endGame();
+    void realizarMovimiento(Player player, int columna);
 
 }
 

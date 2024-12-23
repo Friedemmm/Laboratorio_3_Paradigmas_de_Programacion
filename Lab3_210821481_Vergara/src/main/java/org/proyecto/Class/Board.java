@@ -72,10 +72,10 @@ public class Board implements TDAboard {
     public boolean sePuedeJugar() {
         for (int j = 0; j < 7; j++) {
             if (board[0][j] == 0) {
-                return false;
+                return true; // Si se puede jugar.
             }
         }
-        return true;
+        return false; // No se puede jugar.
     }
 
     /**

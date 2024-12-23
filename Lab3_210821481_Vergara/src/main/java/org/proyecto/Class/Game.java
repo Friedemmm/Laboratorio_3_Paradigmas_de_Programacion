@@ -10,6 +10,7 @@ public class Game implements TDAgame {
     private Player player2;
     private Board board;
     private int currentTurn;
+    private Piece piece;
     private List<String> historial;
 
     //---------------------------------------------------------//
@@ -143,12 +144,7 @@ public class Game implements TDAgame {
      */
     @Override
     public boolean esEmpate() {
-        boolean noFichas = false;
-        if (player1.getRemainingPieces() == 0 || player2.getRemainingPieces() == 0) {
-            noFichas = true;
-        }
-        //
-        if (noFichas && board.entregarGanador() == 0|| board.sePuedeJugar() && board.entregarGanador() == 0) {
+        if (player1.getRemainingPieces() == 0 && player2.getRemainingPieces() == 0 && board.entregarGanador() == 0 || !board.sePuedeJugar() && board.entregarGanador() == 0) {
             return true;
         }
         return false;
@@ -180,6 +176,7 @@ public class Game implements TDAgame {
      */
     @Override
     public int getCurrentPlayer() {
+        int currentTurn = getCurrentTurn();
         if (currentTurn % 2 == 0) {  // Turno par.
             return 1;
         }
@@ -205,4 +202,40 @@ public class Game implements TDAgame {
         }
     }
 
+    /**
+     * RF18.
+     * Si el juego termina, actualiza las estadisticas.
+     */
+    @Override
+    public boolean endGame() {
+        if (board.entregarGanador() != 0 || esEmpate()) {
+            actualizarEstadisticas();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * RF19.
+     * Permite a un jugador realizar un movimiento.
+     */
+    @Override
+    public void realizarMovimiento(Player player, int columna) {
+        if (endGame()) {
+            System.out.println("El juego ha terminado");
+            return;
+        }
+        if (getCurrentPlayer() != player.getID()) {
+            System.out.println("No es tu turno");
+            return;
+        }
+        String colorPieza = player.getColor();
+        Piece piece = new Piece(colorPieza);
+        if (getCurrentPlayer() == player.getID()) {
+            board.jugarFicha(columna, piece);
+            setCurrentTurn(currentTurn + 1);
+            player.setRemainingPieces(player.getRemainingPieces() - 1);
+            history(columna, colorPieza);
+        }
+    }
 }

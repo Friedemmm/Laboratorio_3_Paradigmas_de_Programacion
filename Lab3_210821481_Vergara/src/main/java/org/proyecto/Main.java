@@ -6,6 +6,7 @@ import org.proyecto.Class.Board;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("BIENVENIDO\n");
         Board board = new Board();
 
         Player player1 = new Player(1, "Jugador 1", "rojo", 0, 0, 0, 21);
